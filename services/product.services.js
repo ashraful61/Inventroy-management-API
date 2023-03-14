@@ -8,7 +8,7 @@ exports.getProductsService = async () => {
 
 // Get product by id
 exports.getProductByIdService = async (id) => {
-  const product = await Product.find({ _id: id });
+  const product = await Product.findById(id);
   return product;
 };
 
@@ -19,8 +19,8 @@ exports.createProductService = async (data) => {
 };
 
 //Update product
-exports.updateProductService = async (productId, data) => {
-   //Update way: 1 for update
+exports.updateProductByIdService = async (productId, data) => {
+  //Update way: 1 for update
   const updatedProduct = await Product.updateOne(
     { _id: productId },
     { $set: data },
@@ -38,4 +38,26 @@ exports.updateProductService = async (productId, data) => {
   // );
 
   return updatedProduct;
+};
+
+//Bulk update products
+exports.bulkUpdateProductService = async (data) => {
+  const products = [];
+  for (const product of data.list) {
+    const updatedProduct = Product.updateOne(
+      { _id: product.id },
+      { $set: { price: product.price } },
+      { runValidators: true }
+    );
+    products.push(updatedProduct);
+  }
+  const result = await Promise.all(products);
+  console.log(result);
+  return result;
+};
+
+//delete product
+exports.deleteProductByIdService = async (productId) => {
+  const deletedProduct = await Product.deleteOne({ _id: productId });
+  return deletedProduct;
 };
