@@ -11,5 +11,6 @@ router.route("/update/:id").patch(productController.updateProductById);
 router.route("/bulkUpdate").patch(productController.bulkUpdateProduct);
 router.route("/delete/:id").delete(productController.deleteProductById);
 router.route("/getProductById/:id").get(productController.getProductById);
+router.route("/bulkDelete").delete(productController.bulkDeleteProduct);
 
 module.exports = router;
