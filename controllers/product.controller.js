@@ -117,7 +117,13 @@ module.exports.deleteProductById = async (req, res, next) => {
   try {
     // update product
     const { id } = req.params;
-    const product = await deleteProductByIdService(id);
+    const deletedProduct = await deleteProductByIdService(id);
+    if (!deletedProduct.deletedCount) {
+      return res.status(404).json({
+        status: false,
+        message: "Count not delete the product!",
+      });
+    }
 
     res.status(200).json({
       status: true,
@@ -134,7 +140,6 @@ module.exports.deleteProductById = async (req, res, next) => {
 };
 
 //Bulk delete product
-
 module.exports.bulkDeleteProduct = async (req, res, next) => {
   try {
     const deletedProducts = await bulkDeleteProductService(req.body);
