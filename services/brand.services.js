@@ -8,7 +8,7 @@ exports.createBrandService = async (data) => {
 
 //Get all brand
 exports.getBrandsService = async () => {
-  const brands = await Brand.find({}).select("-products -supplier");
+  const brands = await Brand.find({}).select("-products -suppliers");
   return brands;
 };
 
@@ -25,8 +25,6 @@ exports.updateBrandByIdService = async (brandId, data) => {
     { $set: data },
     { runValidators: true }
   );
-
-
   return updatedBrand;
 };
 

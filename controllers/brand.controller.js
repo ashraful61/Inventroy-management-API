@@ -54,7 +54,7 @@ module.exports.getBrandById = async (req, res, next) => {
     if (!ObjectId.isValid(id)) {
       return res.status(404).json({
         status: false,
-        message: "Id not found",
+       
         error: "Invalid id",
       });
     }
@@ -87,7 +87,7 @@ module.exports.updateBrandById = async (req, res, next) => {
     if (!ObjectId.isValid(id)) {
       return res.status(404).json({
         status: false,
-        message: "Id not found",
+       
         error: "Invalid id",
       });
     }
