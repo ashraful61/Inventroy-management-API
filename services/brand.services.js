@@ -8,7 +8,7 @@ exports.createBrandService = async (data) => {
 
 //Get all brand
 exports.getBrandsService = async () => {
-  const brands = await Brand.find({}).select("-products -suppliers");
+  const brands = await Brand.find({}).populate("products");
   return brands;
 };
 
@@ -44,13 +44,9 @@ exports.updateBrandByIdService = async (brandId, data) => {
 //   return result;
 // };
 
-// //delete brand
-// exports.deleteProductByIdService = async (productId) => {
-//   const deletedProduct = await brand.deleteOne({ _id: productId });
-//   return deletedProduct;
-// };
-// //delete brand
-// exports.bulkDeleteProductService = async (data) => {
-//   const deletedProducts = await brand.deleteMany({ _id: data.ids });
-//   return deletedProducts;
-// };
+//delete a brand
+exports.deleteBrandByIdService = async (brandId) => {
+  const deletedBrand = await Brand.deleteOne({ _id: brandId });
+  console.log('deletedBrand',deletedBrand)
+  return deletedBrand;
+};

@@ -10,6 +10,7 @@ router
 router
   .route("/:id")
   .get(brandController.getBrandById)
-  .patch(brandController.updateBrandById);
+  .patch(brandController.updateBrandById)
+  .delete(brandController.deleteBrandById);
 
 module.exports = router;

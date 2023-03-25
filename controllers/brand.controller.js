@@ -5,6 +5,7 @@ const {
   createBrandService,
   getBrandByIdService,
   updateBrandByIdService,
+  deleteBrandByIdService
 } = require("../services/brand.services");
 const { ObjectId } = mongoose.Types;
 
@@ -34,7 +35,6 @@ module.exports.getBrands = async (req, res, next) => {
     const result = await getBrandsService();
     res.status(200).json({
       status: true,
-      message: "Brand list",
       data: result,
     });
   } catch (error) {
@@ -54,7 +54,6 @@ module.exports.getBrandById = async (req, res, next) => {
     if (!ObjectId.isValid(id)) {
       return res.status(404).json({
         status: false,
-       
         error: "Invalid id",
       });
     }
@@ -87,7 +86,6 @@ module.exports.updateBrandById = async (req, res, next) => {
     if (!ObjectId.isValid(id)) {
       return res.status(404).json({
         status: false,
-       
         error: "Invalid id",
       });
     }
@@ -140,17 +138,17 @@ module.exports.deleteBrandById = async (req, res, next) => {
     // update brand
     const { id } = req.params;
     const deletedBrand = await deleteBrandByIdService(id);
+    console.log(deletedBrand)
     if (!deletedBrand.deletedCount) {
       return res.status(404).json({
         status: false,
-        message: "Count not delete the brand!",
+        message: "Couldn't not delete the brand!",
       });
     }
-
+    console.log('hi')
     res.status(200).json({
       status: true,
       message: "Brand deleted successfully",
-      data: brand,
     });
   } catch (error) {
     res.status(400).send({
