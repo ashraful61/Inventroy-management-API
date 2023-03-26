@@ -157,3 +157,10 @@ module.exports.bulkDeleteProduct = async (req, res, next) => {
     });
   }
 };
+
+module.exports.fileUpload = async (req, res) => {
+  try {
+    //req.files if i want to upload multiple images using uploader.array("image") instead of uploader.single("image")
+    res.status(200).json(req.file);
+  } catch (error) {}
+};

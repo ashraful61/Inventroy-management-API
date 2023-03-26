@@ -1,6 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const productController = require("../controllers/product.controller");
+const uploader = require('../middleware/uploader')
+
+router.post(
+  "/file-upload",
+  uploader.single("image"),
+  productController.fileUpload
+); // If I want to send multiple image then uploader.array("image")
 
 router
   .route("/")
